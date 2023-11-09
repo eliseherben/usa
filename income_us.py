@@ -36,7 +36,7 @@ df_filter = pd.read_csv('filtered_df.csv')
 # In[26]:
 
 
-tab1, tab2, tab3 = st.tabs(['intro', 'overzicht', 'vergelijking'])
+tab1, tab2, tab3 = st.tabs(['Verenigde Staten', 'Staten', 'Vergelijking'])
 
 
 # ### Introductie
@@ -547,6 +547,12 @@ with tab2:
     lijn.update_traces(name="man van 18 t/m 65", selector=dict(name="Age 1, Sex 1"))
     lijn.update_traces(name="vrouw van 18 t/m 65", selector=dict(name="Age 1, Sex 2"))
     lijn.update_traces(name="totaal onder 19", selector=dict(name="Age 4, Sex 0"))
+
+    lijn.update_layout(
+        title='Zorgverzekeringen',
+        xaxis=dict(title='Jaar'),
+        yaxis=dict(title='Zorgverzekeringen')
+    )
 
     # Toon de grafiek in Streamlit
     st.plotly_chart(lijn, use_container_width=True)
