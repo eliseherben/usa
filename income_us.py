@@ -742,7 +742,7 @@ with tab3:
     st.write("Om wat diepere informatie te krijgen te kunnen maken van de verschillende counties in een staat kan er hieronder een vergelijking gemaakt worden. "
              "Hierbij moet er een staat gekozen worden en de grootte van het huishouden. "
              "Daarna kunnen er 2 counties in die staat gekozen worden om te vergelijken. ")
-    with st.expander("Inhoud van de vergelijking")
+    with st.expander("Inhoud van de vergelijking"):
         selected_state = st.selectbox('Kies een staat', income['State_Name'].unique(), key = '2')
         huishouden = st.selectbox('Kies de samenstelling van het huishouden', ['1 volwassene, geen kinderen', '2 volwassenen, geen kinderen', '1 ouder, 1 kind', '1 ouder, 2 kinderen', '1 ouder, 3 kinderen', '1 ouder, 4 kinderen', '2 ouders, 1 kind', '2 ouders, 2 kinderen', '2 ouders, 3 kinderen', '2 ouders, 4 kinderen'], key = '342')  # Parameters: label, minimum, maximum, standaardwaarde
     
