@@ -812,7 +812,7 @@ with tab3:
             y=[gemiddelde_inkomen1, mediaan_inkomen1],
             error_y=dict(type='constant', value=standaarddeviatie_inkomen1),
             labels={'y': 'Inkomen'}, barmode = 'group',
-            name = selected_county1
+            name = selected_county1,
             title='Gemiddelde, Mediaan en Standaarddeviatie van Inkomen'
         )
         
