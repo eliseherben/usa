@@ -513,12 +513,12 @@ with tab2:
 # In[ ]:
 # In[ ]:
 
-
+df_zorg1 = zorg[zorg['YEAR'] < 2016]
 with tab2:
     st.header('Zorgverzekering over de jaren')
     st.write("In de onderstaande grafiek is het aantal mensen met een zorgverzekering per jaar te zien. "
              "Elke kleur staat voor een andere groep mensen in de samenleving op basis van leeftijd of geslacht. ")
-    df_zorg = zorg[zorg['NAME'] == selected_state]
+    df_zorg1 = df_zorg1[df_zorg1['NAME'] == selected_state]
 
     # Selecteer jaren om weer te geven
     jaren = ['2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015']
@@ -526,10 +526,10 @@ with tab2:
     # Maak een Streamlit-figure
     lijn = go.Figure()
 
-    for age in df_zorg.AGECAT.unique():
+    for age in df_zorg1.AGECAT.unique():
         for sex in range(3):
             lijst = []
-            for index, row in df_zorg.iterrows():
+            for index, row in df_zorg1.iterrows():
                 year = row['YEAR']
                 row_age = row['AGECAT']
                 row_sex = row['SEXCAT']
