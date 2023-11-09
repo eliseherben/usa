@@ -807,7 +807,9 @@ with tab3:
         standaarddeviatie_inkomen1 = verg_county1.iloc[0, 3]
         mediaan_inkomen1 = verg_county1.iloc[0, 2]
         
-        bar45 = px.bar(
+        bar45 = go.Figure()
+
+        bar45.add_bar(
             x=['Gemiddelde huishoudinkomen', 'Mediaan huishoudinkomen'],
             y=[gemiddelde_inkomen1, mediaan_inkomen1],
             error_y=dict(type='constant', value=standaarddeviatie_inkomen1),
