@@ -722,6 +722,8 @@ with tab3:
 with tab3:
     st.title("Vergelijkingen")
     selected_state = st.selectbox('Kies een staat', income['State_Name'].unique(), key = '2')
+    huishouden = st.selectbox('Kies de samenstelling van het huishouden', ['1 volwassene, geen kinderen', '2 volwassenen, geen kinderen', '1 ouder, 1 kind', '1 ouder, 2 kinderen', '1 ouder, 3 kinderen', '1 ouder, 4 kinderen', '2 ouders, 1 kind', '2 ouders, 2 kinderen', '2 ouders, 3 kinderen', '2 ouders, 4 kinderen'], key = '342')  # Parameters: label, minimum, maximum, standaardwaarde
+
 
     col8, col9 = st.columns(2)
     with col8:
@@ -731,7 +733,6 @@ with tab3:
         
         cost1 = cost[cost['state'] == afkorting]
         selected_county1 = st.selectbox('Kies een county', cost1['county'].unique(), key = '4')
-        huishouden1 = st.selectbox('Kies de samenstelling van het huishouden', ['1 volwassene, geen kinderen', '2 volwassenen, geen kinderen', '1 ouder, 1 kind', '1 ouder, 2 kinderen', '1 ouder, 3 kinderen', '1 ouder, 4 kinderen', '2 ouders, 1 kind', '2 ouders, 2 kinderen', '2 ouders, 3 kinderen', '2 ouders, 4 kinderen'], key = '342')  # Parameters: label, minimum, maximum, standaardwaarde
         
     with col9:
         state = income[income['State_Name'] == selected_state]
@@ -740,8 +741,6 @@ with tab3:
         
         cost2 = cost[cost['state'] == afkorting]
         selected_county2 = st.selectbox('Kies een county', cost2['county'].unique(), key = '5')
-        huishouden2 = st.selectbox('Kies de samenstelling van het huishouden', ['1 volwassene, geen kinderen', '2 volwassenen, geen kinderen', '1 ouder, 1 kind', '1 ouder, 2 kinderen', '1 ouder, 3 kinderen', '1 ouder, 4 kinderen', '2 ouders, 1 kind', '2 ouders, 2 kinderen', '2 ouders, 3 kinderen', '2 ouders, 4 kinderen'], key = '23')  # Parameters: label, minimum, maximum, standaardwaarde
-
 
 # #### Barplot
 
@@ -749,10 +748,10 @@ with tab3:
 
 
 with tab3:
-    if selected_county1 and selected_county2 and huishouden1 and huishouden2:
+    if selected_county1 and selected_county2 and huishouden:
         # Verzamel gegevens voor beide geselecteerde county en huishouden
-        data1 = cost1[(cost1['county'] == selected_county1) & (cost1['family_member_count'] == huishouden1)]
-        data2 = cost2[(cost2['county'] == selected_county2) & (cost2['family_member_count'] == huishouden2)]
+        data1 = cost1[(cost1['county'] == selected_county1) & (cost1['family_member_count'] == huishouden)]
+        data2 = cost2[(cost2['county'] == selected_county2) & (cost2['family_member_count'] == huishouden)]
 
         data1 = data1[['county', 'Huisvestingskosten', 'Voedingskosten', 'Vervoerskosten', 'Zorgkosten', 'Overige noodzakelijke kosten', 'Kinderopvangkosten', 'Belastingen']]
         melted_df1 = pd.melt(data1, id_vars=['county'], var_name='kostentype', value_name='Kosten')
