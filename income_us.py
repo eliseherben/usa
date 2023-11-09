@@ -308,7 +308,7 @@ with tab2:
         else:
             return 'Hoog inkomen'
 
-    income_threshold_low = 50000# jouw lage drempel voor inkomen
+    income_threshold_low = 40000# jouw lage drempel voor inkomen
     income_threshold_high = 100000# jouw hoge drempel voor inkomen
 
     income['inkomensgroep'] = income['Mean'].apply(lambda x: categorize_income(x, income_threshold_low, income_threshold_high))
@@ -320,8 +320,8 @@ with tab2:
 with tab2:
     # Create a Streamlit app
     st.title('Informatie per staat')
-    st.write("Hieronder zijn verschillende gegevens van een staat gevisualiseerd."
-    "Er is gebruikgemaakt van de gegevens van 2011 tot en met 2015. Met behulp van de drop-downbox kan er een staat worden gekozen." 
+    st.write("Hieronder zijn verschillende gegevens van een staat gevisualiseerd. "
+    "Er is gebruikgemaakt van de gegevens van 2011 tot en met 2015. Met behulp van de drop-downbox kan er een staat worden gekozen. " 
     "De visualisaties zullen zich daar op aanpassen.")
 
     selected_state = st.selectbox('Kies een staat', income['State_Name'].unique(), key = '1')
@@ -337,6 +337,12 @@ with tab2:
 
 
 with tab2:
+    st.write("Hieronder is de verdeling van de verschillende inkomensgroepen over de staat. "
+             "Een laag inkomen is een inkomen onder 40.000, een gemiddeld inkomen is een inkomen tussen de 40.000 en 100.000 en een hoog inkomen is een inkomen boven de 100.000. "
+             "De inkomensgroepen zijn gebasseerd op de verdeling van het inkomen in de periode 2011 tm 2015. "
+             "In de kaart is te zien waar de verschillende inkomensgroepen zich bevinden. "
+             "Daarnaast is er in de tekst boven de kaart weergegeven wat het percentage inwoners zijn onder die inkomensgroep.") 
+    
     col1, col2, col3 = st.columns(3)
 
     filterdf = income[income['State_Name'] == selected_state]
@@ -373,7 +379,7 @@ with tab2:
 
     fig = px.scatter_mapbox(filterdf, lat="Lat", lon="Lon", color = 'inkomensgroep', 
                             color_discrete_map=colors, zoom=5,
-                            mapbox_style="carto-positron", title = 'kaart met inkomensgroepen')
+                            mapbox_style="carto-positron", title = 'Kaart met inkomensgroepen')
 
     fig.update_layout(  
         autosize=True)
@@ -458,9 +464,16 @@ with tab2:
 
 
 with tab2:
+    st.write("In de linker cirkeldiagram is de verdeling van de werksectoren in de desbetreffende staat te zien. "
+    "Hierin is er een verdeling gemaakt tussen de particuliere sector, publieke sector, zelfstandige en onbetaald familiewerk. "
+    "In de interactieve plot kunnen de verschillende delen gemakkelijk geselecteerd worden zodat de informatie duidelijk te zien is. ")
+    
+    st.write("In de rechter cirkeldiagram is de verdeling van de verschillende kosten in de desbetreffende staat te zien. "
+             "Er is heirbij gebruik gemaakt van de vervoerskosten, zorgkosten, kinderopvangkosten, huisvestigingskosten, voedingskosten, belastingen en overige noodzakelijke kosten. ")
+
     with col4:
         data = employment2[employment2['State'] == selected_state]
-        pie3 = px.pie(data, names='Type', values='aantal', color_discrete_sequence=colors_list1)
+        pie3 = px.pie(data, names='Type', values='aantal', color_discrete_sequence=colors_list1, title = "Werksector")
         pie3.update_traces(textposition='inside', textinfo='percent+label', showlegend = False)
         # pie3.update_layout(legend=dict(orientation="h", y=-0.2, font=dict(size=9)))
 
@@ -669,6 +682,9 @@ with tab2:
 
 
 with tab2:
+    st.write("Hieronder is een diagram te zien waarbij het aantal mensen met een zorgverzekering te zien is. "
+             "De periode 2011 tm 2015 is werkelijke data. De jaren na 2015 zijn een voorspelling op basis van de eerdere gegevens. "
+             "Met de verticale lijn is te zien vanaf wanneer er voorspelt wordt. ")
     drempelwaarde_x = 2015  # Pas deze waarde aan
     jaren = cumulative['Year']
 
@@ -724,9 +740,12 @@ with tab3:
 
 with tab3:
     st.title("Vergelijkingen")
+    st.write("Om wat diepere informatie te krijgen te kunnen maken van de verschillende counties in een staat kan er hieronder een vergelijking gemaakt worden. "
+             "Hierbij moet er een staat gekozen worden en de grootte van het huishouden. "
+             "Daarna kunnen er 2 counties in die staat gekozen worden om te vergelijken. ")
+
     selected_state = st.selectbox('Kies een staat', income['State_Name'].unique(), key = '2')
     huishouden = st.selectbox('Kies de samenstelling van het huishouden', ['1 volwassene, geen kinderen', '2 volwassenen, geen kinderen', '1 ouder, 1 kind', '1 ouder, 2 kinderen', '1 ouder, 3 kinderen', '1 ouder, 4 kinderen', '2 ouders, 1 kind', '2 ouders, 2 kinderen', '2 ouders, 3 kinderen', '2 ouders, 4 kinderen'], key = '342')  # Parameters: label, minimum, maximum, standaardwaarde
-
 
     col8, col9 = st.columns(2)
     with col8:
@@ -752,6 +771,9 @@ with tab3:
 
 with tab3:
     if selected_county1 and selected_county2 and huishouden:
+        st.write("In onderstaande grafiek is het verschil tussen de verschillende kosten te zien tussen de counties {selected_county1} en {selected_county1}. "
+                 "Deze counties zijn gevestigd in {selected_state}. "
+                 "De vergelijking is gemaakt op een huishouden van {huishouden}. ")
         # Verzamel gegevens voor beide geselecteerde county en huishouden
         data1 = cost1[(cost1['county'] == selected_county1) & (cost1['family_member_count'] == huishouden)]
         data2 = cost2[(cost2['county'] == selected_county2) & (cost2['family_member_count'] == huishouden)]
