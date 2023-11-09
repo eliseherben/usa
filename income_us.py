@@ -742,26 +742,26 @@ with tab3:
     st.write("Om wat diepere informatie te krijgen te kunnen maken van de verschillende counties in een staat kan er hieronder een vergelijking gemaakt worden. "
              "Hierbij moet er een staat gekozen worden en de grootte van het huishouden. "
              "Daarna kunnen er 2 counties in die staat gekozen worden om te vergelijken. ")
-    with st.expander("Inhoud van de vergelijking"):
-        selected_state = st.selectbox('Kies een staat', income['State_Name'].unique(), key = '2')
-        huishouden = st.selectbox('Kies de samenstelling van het huishouden', ['1 volwassene en geen kinderen', '2 volwassenen en geen kinderen', '1 ouder en 1 kind', '1 ouder en 2 kinderen', '1 ouder en 3 kinderen', '1 ouder en 4 kinderen', '2 ouders en 1 kind', '2 ouders en 2 kinderen', '2 ouders en 3 kinderen', '2 ouders en 4 kinderen'], key = '342')  # Parameters: label, minimum, maximum, standaardwaarde
+
+    selected_state = st.selectbox('Kies een staat', income['State_Name'].unique(), key = '2')
+    huishouden = st.selectbox('Kies de samenstelling van het huishouden', ['1 volwassene en geen kinderen', '2 volwassenen en geen kinderen', '1 ouder en 1 kind', '1 ouder en 2 kinderen', '1 ouder en 3 kinderen', '1 ouder en 4 kinderen', '2 ouders en 1 kind', '2 ouders en 2 kinderen', '2 ouders en 3 kinderen', '2 ouders en 4 kinderen'], key = '342')  # Parameters: label, minimum, maximum, standaardwaarde
     
-        col8, col9 = st.columns(2)
-        with col8:
-            state = income[income['State_Name'] == selected_state]
-            state = state.reset_index(drop=True)
-            afkorting = state['State_ab'].loc[0]
-            
-            cost1 = cost[cost['state'] == afkorting]
-            selected_county1 = st.selectbox('Kies een county', cost1['county'].unique(), key = '4')
-            
-        with col9:
-            state = income[income['State_Name'] == selected_state]
-            state = state.reset_index(drop=True)
-            afkorting = state['State_ab'].loc[0]
-            
-            cost2 = cost[cost['state'] == afkorting]
-            selected_county2 = st.selectbox('Kies een county', cost2['county'].unique(), key = '5')
+    col8, col9 = st.columns(2)
+    with col8:
+        state = income[income['State_Name'] == selected_state]
+        state = state.reset_index(drop=True)
+        afkorting = state['State_ab'].loc[0]
+        
+        cost1 = cost[cost['state'] == afkorting]
+        selected_county1 = st.selectbox('Kies een county', cost1['county'].unique(), key = '4')
+        
+    with col9:
+        state = income[income['State_Name'] == selected_state]
+        state = state.reset_index(drop=True)
+        afkorting = state['State_ab'].loc[0]
+        
+        cost2 = cost[cost['state'] == afkorting]
+        selected_county2 = st.selectbox('Kies een county', cost2['county'].unique(), key = '5')
 
 # #### Barplot
 
