@@ -320,6 +320,9 @@ with tab2:
 with tab2:
     # Create a Streamlit app
     st.title('Informatie per staat')
+    st.write("Hieronder zijn verschillende gegevens van een staat gevisualiseerd.")
+    "Er is gebruikgemaakt van de gegevens van 2011 tot en met 2015. Met behulp van de drop-downbox kan er een staat worden gekozen." 
+    "De visualisaties zullen zich daar op aanpassen.")
 
     selected_state = st.selectbox('Kies een staat', income['State_Name'].unique(), key = '1')
 
