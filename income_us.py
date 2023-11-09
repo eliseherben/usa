@@ -770,7 +770,7 @@ with tab3:
 
 with tab3:
     if selected_county1 and selected_county2 and huishouden:
-        st.write("In onderstaande grafiek is het verschil tussen de verschillende kosten te zien tussen de counties {selected_county1} en {selected_county1}. "
+        st.write(f"In onderstaande grafiek is het verschil tussen de verschillende kosten te zien tussen de counties {selected_county1} en {selected_county1}. "
                  "Deze counties zijn gevestigd in {selected_state}. "
                  "De vergelijking is gemaakt op een huishouden van {huishouden}. ")
         # Verzamel gegevens voor beide geselecteerde county en huishouden
