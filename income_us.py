@@ -511,11 +511,6 @@ with tab2:
 # In[ ]:
 
 # In[ ]:
-
-
-zorg = zorg[zorg['YEAR'] < 2016]
-
-
 # In[ ]:
 
 
@@ -561,15 +556,15 @@ with tab2:
 
 
 with tab2:
-    staat = df_filter[df_filter['Area_name'] == selected_state]
-
-
-# In[ ]:
-
+    df_zorg = zorg[zorg['YEAR'] < 2016]
+    df_zorg = df_zorg[df_zorg['AGECAT'] == 0]
+    df_zorg = df_zorg[df_zorg['SEXCAT'] == 0]
+    df_zorg = df_zorg[['NIC_PT', 'NAME', 'NUI_PT', 'YEAR', 'AGECAT', 'SEXCAT']]
+    
+with tab2:
+    staat = df_filtered[df_filtered['Area_name'] == selected_state]
 
 with tab2:
-
-
     # Lijst van de prefixen die we willen verwerken
     prefixes = ['Unemployed', 'Employed', 'Civilian_labor_force']
 
@@ -605,56 +600,29 @@ with tab2:
             jaar_employed = jaar_employed.merge(jaar_column, on=['Area_name', 'Year'])
 
     # Toon het resultaat
-
-
-# In[ ]:
-
+    jaar_employed['Year'] = jaar_employed['Year'].astype(int)
+    # jaar_employed
+    
+with tab2:
+    jaar_zorg = df_zorg[df_zorg['NAME'] == selected_state]
+# jaar_zorg
 
 with tab2:
-    staat2 = df_totaal[df_totaal['NAME'] == selected_state]
-
-
-# In[ ]:
-
-
-with tab2:
-
-    # Verwijder duplicaten op basis van 'NAME'
-    staat2 = staat2.drop_duplicates(subset=['NAME'])
-
-    # Gebruik melt om de kolommen om te zetten naar rijen
-    jaar_zorg = pd.melt(staat2, id_vars=['NAME'], var_name='Year_Age_Sex', value_name='Value')
-
-    # Filter de rijen waar 'Year_Age_Sex' niet overeenkomt met het patroon 'YYYY_AgeX_SexY'
-    jaar_zorg = jaar_zorg[jaar_zorg['Year_Age_Sex'].str.match(r'\d{4}_Age\d+_Sex\d+')]
-
-    # Split Year_Age_Sex in afzonderlijke kolommen
-    jaar_zorg[['Year', 'Age', 'Sex']] = jaar_zorg['Year_Age_Sex'].str.split('_', expand=True)
-
     # Drop de oorspronkelijke kolom Year_Age_Sex
-    jaar_zorg.drop(columns=['Year_Age_Sex', 'Age', 'Sex'], inplace=True)
+    jaar_zorg.drop(columns=['AGECAT', 'SEXCAT', 'NUI_PT'], inplace=True)
     # jaar_zorg
-
-
-# In[ ]:
-
-
+    
 with tab2:
-    samen = jaar_zorg.merge(jaar_employed, on='Year')
-
-
-# In[ ]:
-
-
+    samen = jaar_zorg.merge(jaar_employed, left_on='YEAR', right_on='Year').sort_values(by='YEAR', ascending=True)
+    # samen
+    
 with tab2:
-
-
     # Filter de gegevens voor trainingsgegevens
-    train_data = samen[samen['Year'] < '2016']
+    train_data = samen[samen['Year'] < 2016]
 
     # Bouw een lineair regressiemodel
     model = LinearRegression()
-    model.fit(train_data[['Year']], train_data['Value'])
+    model.fit(train_data[['Year']], train_data['NIC_PT'])
 
     # Voorspellingen voor de jaren 2016 tot en met 2021
     years_to_predict = [2016, 2017, 2018, 2019, 2020, 2021]
@@ -663,24 +631,20 @@ with tab2:
     # Voeg de voorspellingen toe aan een DataFrame
     predictions_df = pd.DataFrame({
         'Year': years_to_predict,
-        'Value': predictions
+        'NIC_PT': predictions
     })
 
     train_predictions = model.predict(train_data[['Year']])
-    r2 = r2_score(train_data['Value'], train_predictions)
+    r2 = r2_score(train_data['NIC_PT'], train_predictions)
 
     # Toon de R-squared score
-    print("R-squared score for the model: {:.2f}".format(r2))
+    # print("R-squared score for the model: {:.2f}".format(r2))
 
     # Toon het resultaat
     cumulative = pd.concat([samen, predictions_df], ignore_index=True)
-    cumulative['Value'] = cumulative['Value'].astype(int)
+    # cumulative['NIC_PT'] = cumulative['NIC_PT'].astype(int)
     # cumulative
-
-
-# In[ ]:
-
-
+    
 with tab2:
     st.header("Voorspelling zorgverzekeringen")
     st.write("Hieronder is een diagram te zien waarbij het aantal mensen met een zorgverzekering te zien is. "
@@ -691,22 +655,16 @@ with tab2:
     jaren = cumulative['Year']
 
     # Cumulatieve dieselwaarden tot en met 2016 (voorbeeldgegevens, pas aan zoals nodig)
-    diesel = cumulative['Value']
+    diesel = cumulative['NIC_PT']
 
     # Maak een Plotly figuur
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=jaren, y=diesel, mode='lines+markers', name='Cumulatieve Diesel'))
 
-    # Voeg een lijn toe voor de drempelwaarde
-    fig.add_shape(
-        type='line',
-        x0=drempelwaarde_x,
-        y0=0,
-        x1=drempelwaarde_x,
-        y1=max(diesel),
-        line=dict(color='red', width=2),
-        name='Drempelwaarde'
-    )
+    # Voeg een lijn toe voor de cumulatieve dieselwaarden tot de drempelwaarde
+    fig.add_trace(go.Scatter(x=jaren[jaren <= drempelwaarde_x], y=diesel[jaren <= drempelwaarde_x], mode='lines+markers', name='Aantal Zorgverzekeringen'))
+
+    # Voeg een lijn toe voor de cumulatieve dieselwaarden na de drempelwaarde en geef deze een andere kleur
+    fig.add_trace(go.Scatter(x=jaren[jaren >= drempelwaarde_x], y=diesel[jaren >= drempelwaarde_x], mode='lines+markers', name='Voorspelde aantal Zorgverzekeringen', line=dict(color='red')))
 
     fig.update_layout(
         title='Zorgverzekeringen',
@@ -714,7 +672,9 @@ with tab2:
         yaxis=dict(title='Zorgverzekeringen')
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig)
+
+
 
 
 # ### Vergelijking
