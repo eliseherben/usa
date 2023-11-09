@@ -811,8 +811,7 @@ with tab3:
             x=['Gemiddelde huishoudinkomen', 'Mediaan huishoudinkomen'],
             y=[gemiddelde_inkomen1, mediaan_inkomen1],
             error_y=dict(type='constant', value=standaarddeviatie_inkomen1), barmode = 'group',
-            title='Gemiddelde, Mediaan en Standaarddeviatie van Inkomen'
-        )
+            title='Gemiddelde, Mediaan en Standaarddeviatie van Inkomen')
         
         verg_county2 = verg[verg['County'] == selected_county2]
         gemiddelde_inkomen2 = verg_county2.iloc[0, 1]
