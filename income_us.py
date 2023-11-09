@@ -337,6 +337,7 @@ with tab2:
 
 
 with tab2:
+    st.header("Huishoudinkomen in inkomensgroepen")
     st.write("Hieronder is de verdeling van de verschillende inkomensgroepen over de staat. "
              "Een laag inkomen is een inkomen onder 40.000, een gemiddeld inkomen is een inkomen tussen de 40.000 en 100.000 en een hoog inkomen is een inkomen boven de 100.000. "
              "De inkomensgroepen zijn gebasseerd op de verdeling van het inkomen in de periode 2011 tm 2015. "
@@ -396,6 +397,13 @@ with tab2:
 
 
 with tab2:
+    st.write("In de linker cirkeldiagram is de verdeling van de werksectoren in de desbetreffende staat te zien. "
+    "Hierin is er een verdeling gemaakt tussen de particuliere sector, publieke sector, zelfstandige en onbetaald familiewerk. "
+    "In de interactieve plot kunnen de verschillende delen gemakkelijk geselecteerd worden zodat de informatie duidelijk te zien is. ")
+    
+    st.write("In de rechter cirkeldiagram is de verdeling van de verschillende kosten in de desbetreffende staat te zien. "
+             "Er is hierbij gebruik gemaakt van de vervoerskosten, zorgkosten, kinderopvangkosten, huisvestigingskosten, voedingskosten, belastingen en overige noodzakelijke kosten. ")
+
     col4, col5 = st.columns(2)
 
 
@@ -464,13 +472,6 @@ with tab2:
 
 
 with tab2:
-    st.write("In de linker cirkeldiagram is de verdeling van de werksectoren in de desbetreffende staat te zien. "
-    "Hierin is er een verdeling gemaakt tussen de particuliere sector, publieke sector, zelfstandige en onbetaald familiewerk. "
-    "In de interactieve plot kunnen de verschillende delen gemakkelijk geselecteerd worden zodat de informatie duidelijk te zien is. ")
-    
-    st.write("In de rechter cirkeldiagram is de verdeling van de verschillende kosten in de desbetreffende staat te zien. "
-             "Er is heirbij gebruik gemaakt van de vervoerskosten, zorgkosten, kinderopvangkosten, huisvestigingskosten, voedingskosten, belastingen en overige noodzakelijke kosten. ")
-
     with col4:
         data = employment2[employment2['State'] == selected_state]
         pie3 = px.pie(data, names='Type', values='aantal', color_discrete_sequence=colors_list1, title = "Werksector")
@@ -495,7 +496,7 @@ with tab2:
         names = filtered_df.columns[1:9].tolist()
 
         # Maak een pie chart met de geselecteerde waarden en namen
-        pie4 = px.pie(values=values, names=names, color_discrete_sequence=colors_list2)
+        pie4 = px.pie(values=values, names=names, color_discrete_sequence=colors_list2, title = 'Verdeling kosten')
         pie4.update_traces(textposition='inside', textinfo='percent+label', showlegend = False)
         # pie4.update_layout(legend=dict(orientation="h", font=dict(size=9)))
 
