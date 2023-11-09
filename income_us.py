@@ -458,7 +458,7 @@ with tab2:
     with col4:
         data = employment2[employment2['State'] == selected_state]
         pie3 = px.pie(data, names='Type', values='aantal', color_discrete_sequence=colors_list1)
-        pie3.update_traces(textposition='inside', textinfo='percent+label')
+        pie3.update_traces(textposition='inside', textinfo='percent+label', show_legend = False)
         # pie3.update_layout(legend=dict(orientation="h", y=-0.2, font=dict(size=9)))
 
         # Streamlit app
@@ -480,7 +480,7 @@ with tab2:
 
         # Maak een pie chart met de geselecteerde waarden en namen
         pie4 = px.pie(values=values, names=names, color_discrete_sequence=colors_list2)
-        pie4.update_traces(textposition='inside', textinfo='percent+label')
+        pie4.update_traces(textposition='inside', textinfo='percent+label', show_legend = False)
         # pie4.update_layout(legend=dict(orientation="h", font=dict(size=9)))
 
 
