@@ -792,7 +792,7 @@ with tab3:
         fig.add_trace(go.Bar(x=melted_df2['kostentype'], y=melted_df2['Kosten'], name=selected_county2))
 
         # Update de layout van de figuur voor een legenda
-        fig.update_layout(barmode='group', legend=dict(title=dict(text='Counties')))
+        fig.update_layout(barmode='group', legend=dict(title=dict(text='Counties')), title = 'Verdeling kosten')
 
         # Toon de plot
         st.plotly_chart(fig)
