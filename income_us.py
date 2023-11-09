@@ -771,8 +771,8 @@ with tab3:
 with tab3:
     if selected_county1 and selected_county2 and huishouden:
         st.write(f"In onderstaande grafiek is het verschil tussen de verschillende kosten te zien tussen de counties {selected_county1} en {selected_county1}. "
-                 "Deze counties zijn gevestigd in {selected_state}. "
-                 "De vergelijking is gemaakt op een huishouden van {huishouden}. ")
+                 f"Deze counties zijn gevestigd in {selected_state}. "
+                 f"De vergelijking is gemaakt op een huishouden van {huishouden}. ")
         # Verzamel gegevens voor beide geselecteerde county en huishouden
         data1 = cost1[(cost1['county'] == selected_county1) & (cost1['family_member_count'] == huishouden)]
         data2 = cost2[(cost2['county'] == selected_county2) & (cost2['family_member_count'] == huishouden)]
