@@ -812,8 +812,7 @@ with tab3:
         bar45.add_trace(go.Bar(
             x=['Gemiddelde huishoudinkomen', 'Mediaan huishoudinkomen'],
             y=[gemiddelde_inkomen1, mediaan_inkomen1],
-            error_y=dict(type='constant', value=standaarddeviatie_inkomen1),
-            labels={'y': 'Inkomen'}, barmode = 'group',
+            error_y=dict(type='constant', value=standaarddeviatie_inkomen1), barmode = 'group',
             name = selected_county1,
             title='Gemiddelde, Mediaan en Standaarddeviatie van Inkomen'
         ))
