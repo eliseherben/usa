@@ -520,7 +520,9 @@ zorg = zorg[zorg['YEAR'] < 2016]
 
 
 with tab2:
-    st.header('Grafiek met gegevens over jaren')
+    st.header('Zorgverzekering over de jaren')
+    st.write("In de onderstaande grafiek is het aantal mensen met een zorgverzekering per jaar te zien. "
+             "Elke kleur staat voor een andere groep mensen in de samenleving op basis van leeftijd of geslacht. ")
     df_zorg = zorg[zorg['NAME'] == selected_state]
 
     # Selecteer jaren om weer te geven
@@ -683,6 +685,7 @@ with tab2:
     st.header("Voorspelling zorgverzekeringen")
     st.write("Hieronder is een diagram te zien waarbij het aantal mensen met een zorgverzekering te zien is. "
              "De periode 2011 tm 2015 is werkelijke data. De jaren na 2015 zijn een voorspelling op basis van de eerdere gegevens. "
+             "Ook is er gekeken naar hoeveel mensen een baan hadden en hoeveel mensen werkloos zijn. "
              "Met de verticale lijn is te zien vanaf wanneer er voorspelt wordt. ")
     drempelwaarde_x = 2015  # Pas deze waarde aan
     jaren = cumulative['Year']
