@@ -801,6 +801,33 @@ with tab3:
         st.plotly_chart(fig)
 
 
+        verg = income.groupby('County')[['Mean', 'Median', 'Stdev']].mean().reset_index()
+        verg_county1 = verg[verg['County'] == selected_county1]
+        gemiddelde_inkomen1 = verg_county1.iloc[0, 1]
+        standaarddeviatie_inkomen1 = verg_county1.iloc[0, 3]
+        mediaan_inkomen1 = verg_county1.iloc[0, 2]
+        
+        bar45 = px.bar(
+            x=['Gemiddelde huishoudinkomen', 'Mediaan huishoudinkomen'],
+            y=[gemiddelde_inkomen1, mediaan_inkomen1],
+            error_y=dict(type='constant', value=standaarddeviatie_inkomen1),
+            labels={'y': 'Inkomen'}, barmode = 'group',
+            name = selected_county1
+            title='Gemiddelde, Mediaan en Standaarddeviatie van Inkomen'
+        )
+        
+        verg_county2 = verg[verg['County'] == selected_county2]
+        gemiddelde_inkomen2 = verg_county2.iloc[0, 1]
+        standaarddeviatie_inkomen2 = verg_county2.iloc[0, 3]
+        mediaan_inkomen2 = verg_county2.iloc[0, 2]
+        bar45.add_bar(
+            x=['Gemiddelde huishoudinkomen', 'Mediaan huishoudinkomen'],
+            y=[gemiddelde_inkomen2, mediaan_inkomen2],
+            error_y=dict(type='constant', value=standaarddeviatie_inkomen2),
+            name=selected_county2
+        )
+        st.plotly_chart(bar45)
+
 # In[ ]:
 
 
