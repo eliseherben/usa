@@ -817,7 +817,8 @@ with tab3:
         gemiddelde_inkomen2 = verg_county2.iloc[0, 1]
         standaarddeviatie_inkomen2 = verg_county2.iloc[0, 3]
         mediaan_inkomen2 = verg_county2.iloc[0, 2]
-       fig.add_bar(
+        
+        fig.add_bar(
             x=['Gemiddelde huishoudinkomen', 'Mediaan huishoudinkomen'],
             y=[gemiddelde_inkomen2, mediaan_inkomen2],
             error_y=dict(type='constant', value=standaarddeviatie_inkomen2),
