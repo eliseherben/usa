@@ -562,7 +562,7 @@ with tab2:
     df_zorg = df_zorg[['NIC_PT', 'NAME', 'NUI_PT', 'YEAR', 'AGECAT', 'SEXCAT']]
     
 with tab2:
-    staat = df_filtered[df_filtered['Area_name'] == selected_state]
+    staat = df_filter[df_filter['Area_name'] == selected_state]
 
 with tab2:
     # Lijst van de prefixen die we willen verwerken
