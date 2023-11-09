@@ -339,7 +339,7 @@ with tab2:
 with tab2:
     st.header("Huishoudinkomen")
     st.write("Hieronder is de verdeling van het huishoudinkomen opgedeeld in inkomensgroepen over de staat te zien. "
-             "Een laag inkomen is een inkomen onder 40.000, een gemiddeld inkomen is een inkomen tussen de 40.000 en 100.000 en een hoog inkomen is een inkomen boven de 100.000. "
+             "Een laag inkomen is een inkomen onder $40.000, een gemiddeld inkomen is een inkomen tussen de $40.000 en $100.000 en een hoog inkomen is een inkomen boven de $100.000. "
              "De inkomensgroepen zijn gebasseerd op de verdeling van het inkomen in de periode 2011 tm 2015. "
              "In de kaart is te zien waar de verschillende inkomensgroepen zich bevinden. "
              "Daarnaast is er in de tekst boven de kaart weergegeven wat het percentage inwoners zijn onder die inkomensgroep.") 
