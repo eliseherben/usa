@@ -337,8 +337,8 @@ with tab2:
 
 
 with tab2:
-    st.header("Huishoudinkomen in inkomensgroepen")
-    st.write("Hieronder is de verdeling van de verschillende inkomensgroepen over de staat. "
+    st.header("Huishoudinkomen")
+    st.write("Hieronder is de verdeling van het huishoudinkomen opgedeeld in inkomensgroepen over de staat te zien. "
              "Een laag inkomen is een inkomen onder 40.000, een gemiddeld inkomen is een inkomen tussen de 40.000 en 100.000 en een hoog inkomen is een inkomen boven de 100.000. "
              "De inkomensgroepen zijn gebasseerd op de verdeling van het inkomen in de periode 2011 tm 2015. "
              "In de kaart is te zien waar de verschillende inkomensgroepen zich bevinden. "
@@ -397,6 +397,7 @@ with tab2:
 
 
 with tab2:
+    st.header("Verdelingen")
     st.write("In de linker cirkeldiagram is de verdeling van de werksectoren in de desbetreffende staat te zien. "
     "Hierin is er een verdeling gemaakt tussen de particuliere sector, publieke sector, zelfstandige en onbetaald familiewerk. "
     "In de interactieve plot kunnen de verschillende delen gemakkelijk geselecteerd worden zodat de informatie duidelijk te zien is. ")
@@ -509,10 +510,6 @@ with tab2:
 
 # In[ ]:
 
-
-col6, col7 = st.columns(2)
-
-
 # In[ ]:
 
 
@@ -523,7 +520,7 @@ zorg = zorg[zorg['YEAR'] < 2016]
 
 
 with tab2:
-    st.title('Grafiek met gegevens over jaren')
+    st.header('Grafiek met gegevens over jaren')
     df_zorg = zorg[zorg['NAME'] == selected_state]
 
     # Selecteer jaren om weer te geven
@@ -683,6 +680,7 @@ with tab2:
 
 
 with tab2:
+    st.header("Voorspelling zorgverzekeringen")
     st.write("Hieronder is een diagram te zien waarbij het aantal mensen met een zorgverzekering te zien is. "
              "De periode 2011 tm 2015 is werkelijke data. De jaren na 2015 zijn een voorspelling op basis van de eerdere gegevens. "
              "Met de verticale lijn is te zien vanaf wanneer er voorspelt wordt. ")
