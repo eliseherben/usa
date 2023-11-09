@@ -720,16 +720,16 @@ with tab2:
 
 
 with tab3:
-    cost['family_member_count'] = cost['family_member_count'].replace('1p0c', '1 volwassene, geen kinderen')
-    cost['family_member_count'] = cost['family_member_count'].replace('2p0c', '2 volwassenen, geen kinderen')
-    cost['family_member_count'] = cost['family_member_count'].replace('1p1c', '1 ouder, 1 kind')
-    cost['family_member_count'] = cost['family_member_count'].replace('1p2c', '1 ouder, 2 kinderen')
-    cost['family_member_count'] = cost['family_member_count'].replace('1p3c', '1 ouder, 3 kinderen')
-    cost['family_member_count'] = cost['family_member_count'].replace('1p4c', '1 ouder, 4 kinderen')
-    cost['family_member_count'] = cost['family_member_count'].replace('2p1c', '2 ouders, 1 kind')
-    cost['family_member_count'] = cost['family_member_count'].replace('2p2c', '2 ouders, 2 kinderen')
-    cost['family_member_count'] = cost['family_member_count'].replace('2p3c', '2 ouders, 3 kinderen')
-    cost['family_member_count'] = cost['family_member_count'].replace('2p4c', '2 ouders, 4 kinderen')
+    cost['family_member_count'] = cost['family_member_count'].replace('1p0c', '1 volwassene en geen kinderen')
+    cost['family_member_count'] = cost['family_member_count'].replace('2p0c', '2 volwassenen en geen kinderen')
+    cost['family_member_count'] = cost['family_member_count'].replace('1p1c', '1 ouder en 1 kind')
+    cost['family_member_count'] = cost['family_member_count'].replace('1p2c', '1 ouder en 2 kinderen')
+    cost['family_member_count'] = cost['family_member_count'].replace('1p3c', '1 ouder en 3 kinderen')
+    cost['family_member_count'] = cost['family_member_count'].replace('1p4c', '1 ouder en 4 kinderen')
+    cost['family_member_count'] = cost['family_member_count'].replace('2p1c', '2 ouders en 1 kind')
+    cost['family_member_count'] = cost['family_member_count'].replace('2p2c', '2 ouders en 2 kinderen')
+    cost['family_member_count'] = cost['family_member_count'].replace('2p3c', '2 ouders en 3 kinderen')
+    cost['family_member_count'] = cost['family_member_count'].replace('2p4c', '2 ouders en 4 kinderen')
 
 
 # #### Selectie vergelijkingen
