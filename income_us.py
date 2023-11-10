@@ -308,10 +308,17 @@ with tab2:
         else:
             return 'Hoog inkomen'
 
-    income_threshold_low = 40000# jouw lage drempel voor inkomen
-    income_threshold_high = 100000# jouw hoge drempel voor inkomen
+    dataset_sorted = inkomen.sort_values(by='Mean')
 
-    income['inkomensgroep'] = income['Mean'].apply(lambda x: categorize_income(x, income_threshold_low, income_threshold_high))
+    # Bepaal de drempelwaarden voor de inkomensgroepen
+    n = len(dataset_sorted)
+    income_threshold_low = int(0.33 * n)
+    income_threshold_high = int(0.66 * n)
+    
+    # income_threshold_low = 40000# jouw lage drempel voor inkomen
+    # income_threshold_high = 100000# jouw hoge drempel voor inkomen
+
+    income['inkomensgroep'] = dataset_sorted['Mean'].apply(lambda x: categorize_income(x, income_threshold_low, income_threshold_high))
 
 
 # In[ ]:
